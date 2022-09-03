@@ -5,19 +5,20 @@
 using namespace std;
 
 // funções de interface 
-void opcoes (){ // mostra as opções que o programa executa
-	cout<<"_____________________"<<endl;
-	cout<<"			CONTROLE DE ESTOQUE					"<<endl;
-	cout<<"	 Escolha uma opcao a seguir para realizar uma acao	"<<endl;
-	cout<<"1: Cadastrar um medicamento                        "<<endl;
-	cout<<"2: Consultar um medicamento						"<<endl;
-	cout<<"3: Listar medicamentos cadastrados					"<<endl;
-	cout<<"4: Excluir um medicamento							"<<endl;
-	cout<<"5: Efetuar uma venda 								"<<endl;
-	cout<<"6: Listar dados de medicamentos em estoque			"<<endl;
-	cout<<"7: Exportar dados									"<<endl;
-	cout<<"8: Sair											"<<endl;
-	cout<<"_____________________"<<endl;
+void opcoes ()
+{ // mostra as opções que o programa executa
+    cout<<"_______________________________________________"<<endl;
+    cout<<"             CONTROLE DE ESTOQUE                                          "<<endl;
+    cout<<"         Escolha uma opcao a seguir para realizar uma acao    "<<endl;
+    cout<<"1: Cadastrar um medicamento                                                  "<<endl;
+    cout<<"2: Consultar um medicamento                                                  "<<endl;
+    cout<<"3: Listar medicamentos cadastrados                                        "<<endl;
+    cout<<"4: Excluir um medicamento                                                       "<<endl;
+    cout<<"5: Efetuar uma venda                                                                "<<endl;
+    cout<<"6: Listar dados de medicamentos em estoque                       "<<endl;
+    cout<<"7: Exportar dados	                                                                     "<<endl;
+    cout<<"8: Sair                                                                                         "<<endl;
+    cout<<"______________________________________________"<<endl;
 } 
 
 // registro que armazena os dados
@@ -38,9 +39,9 @@ registroMedicamento* redimensiona (registroMedicamento *v, int &capacidade) // r
 
     //cout << "Endereco antigo: " << v << endl;
 
-	registroMedicamento *novo = new registroMedicamento[capacidade + aumento];
-	
-	memcpy(novo,v,(sizeof(registroMedicamento)*capacidade));
+    registroMedicamento *novo = new registroMedicamento[capacidade + aumento];
+
+    memcpy(novo,v,(sizeof(registroMedicamento)*capacidade));
 
     capacidade = capacidade + aumento;
 
@@ -57,12 +58,7 @@ registroMedicamento* redimensiona (registroMedicamento *v, int &capacidade) // r
 
 registroMedicamento* incluir (registroMedicamento *v, int &tamanho, int &inserir)
 {
-    if (inserir < tamanho)
-    {
-        cout << "Numero de medicamentos inseridos: " << inserir << endl;
-        cout << "Codigo do Medicamento: ";
-        cin.ignore();
-        cin>> v[inserir].id_Medicamento;
+    if (inserir < tamanho){
         cout << "Nome do medicamento: ";
         cin.ignore();
         getline(cin,v[inserir].NomeMedicamento);
@@ -72,65 +68,61 @@ registroMedicamento* incluir (registroMedicamento *v, int &tamanho, int &inserir
         cout << "Nome do laboratorio: ";
         cin.ignore();
         getline(cin,v[inserir].NomeDoLaboratorio);
+        cout << "Codigo de identificacao: ";
+        cin.ignore();
+        cin>> v[inserir].id_Medicamento;
         cout << "Quantidade disponivel: ";
         cin>> v[inserir].QuantidadeDisponivel;
         cout<<"Preco: ";
         cin>> v[inserir].Preco;
-	}
-	
-	else{
-		
-		int posicao = 0;
-	
-		while ((posicao < tamanho) and (v[posicao].NomeMedicamento != "-1")){
-			posicao++;
-		}
-		
-		if (posicao < tamanho){
-			cout << "posicao:" << posicao << endl;
-			cout << "Codigo do Medicamento: ";
-			cin >> v[posicao].id_Medicamento;
-			cout << "Informe o nome do medicamento: ";
-			cin.ignore();
-			getline(cin, v[posicao].NomeMedicamento);
-			cout << "Informe a descrição do medicamento ";
-			cin >> v[posicao].DescricaoDoMedicamento;
-			cout << "Informe o nome do Laboratorio: ";
-			cin.ignore();
-			getline(cin, v[posicao].NomeDoLaboratorio);
-            cout << "Informe a quantidade disponivel: ";
-            cin >> v[posicao].QuantidadeDisponivel;
-            cout << "Informe o Preco: ";
-            cin >> v[posicao].Preco;
-			inserir--;
-		}
-		
-		else
-        {
-		
-			v = redimensiona(v, tamanho);
+    }
 
-			cout << "posicao:" << posicao << endl;
-			cout << "Codigo do Medicamento: ";
-			cin >> v[posicao].id_Medicamento;
+    else{
+
+        int posicao = 0;
             
-			cout << "Informe o nome do medicamento: ";
-			cin.ignore();
-			getline(cin, v[posicao].NomeMedicamento);
-            
-			cout << "Informe a descrição do medicamento ";
-			cin >> v[posicao].DescricaoDoMedicamento;
-            
-			cout << "Informe o nome do Laboratorio: ";
-			cin.ignore();
-			getline(cin, v[posicao].NomeDoLaboratorio);
-            
+            while ((posicao < tamanho) and (v[posicao].NomeMedicamento != "-1")){
+            posicao++;
+        }
+
+        if (posicao < tamanho)
+        {
+            cout << "posicao:" << posicao << endl;
+            cout << "Codigo do Medicamento: ";
+            cin >> v[posicao].id_Medicamento;
+            cout << "Informe o nome do medicamento: ";
+            cin.ignore();
+            getline(cin, v[posicao].NomeMedicamento);
+            cout << "Informe a descrição do medicamento ";
+            cin >> v[posicao].DescricaoDoMedicamento;
+            cout << "Informe o nome do Laboratorio: ";
+            cin.ignore();
+            getline(cin, v[posicao].NomeDoLaboratorio);
             cout << "Informe a quantidade disponivel: ";
             cin >> v[posicao].QuantidadeDisponivel;
-            
             cout << "Informe o Preco: ";
             cin >> v[posicao].Preco;
-            
+            inserir--;
+        }
+        else
+        {
+            v = redimensiona(v, tamanho);
+
+            cout << "posicao:" << posicao << endl;
+            cout << "Codigo do Medicamento: ";
+            cin >> v[posicao].id_Medicamento;
+            cout << "Informe o nome do medicamento: ";
+            cin.ignore();
+            getline(cin, v[posicao].NomeMedicamento);
+            cout << "Informe a descrição do medicamento ";
+            cin >> v[posicao].DescricaoDoMedicamento;
+            cout << "Informe o nome do Laboratorio: ";
+            cin.ignore();
+            getline(cin, v[posicao].NomeDoLaboratorio);
+            cout << "Informe a quantidade disponivel: ";
+            cin >> v[posicao].QuantidadeDisponivel;
+            cout << "Informe o Preco: ";
+            cin >> v[posicao].Preco;
         }
     }
     
@@ -148,12 +140,12 @@ void listar (registroMedicamento *v, int inserir)
             cout << "Nome do medicamento: " << i << endl;
             cout << "Descricao do medicamento: " << v[i].DescricaoDoMedicamento << endl;
             cout << "Nome do laboratorio: " << v[i].NomeDoLaboratorio << endl;
-	        cout << "Codigo de identificacao: " << v[i].id_Medicamento << endl ;
-	        cout << "Quantidade disponivel: "<< v[i].QuantidadeDisponivel << endl;
-	        cout << "Preco: " << v[i].Preco << endl;
+            cout << "Codigo de identificacao: " << v[i].id_Medicamento << endl ;
+            cout << "Quantidade disponivel: "<< v[i].QuantidadeDisponivel << endl;
+            cout << "Preco: " << v[i].Preco << endl;
             cout << "----------------------------" << endl;
         }
-    
+
 } 
 
 // função para ordenar os medicamentos
@@ -163,19 +155,19 @@ void quick(registroMedicamento *vetor, int inicio, int fim)    // utiliza o mét
 { 
     int i, j, meio;
     int aux, pivo;
-   
+
     i = inicio;
     j = fim;
-   
+
     meio = (int) ((i + j) / 2);
     pivo = vetor[meio].id_Medicamento;
-   
+
     do{
         while (vetor[i].id_Medicamento < pivo) 
             i = i + 1;
         while (vetor[j].id_Medicamento > pivo) 
             j = j - 1;
-      
+
         if (i <= j){
             aux = vetor[i].id_Medicamento;
             vetor[i].id_Medicamento = vetor[j].id_Medicamento;
@@ -185,7 +177,7 @@ void quick(registroMedicamento *vetor, int inicio, int fim)    // utiliza o mét
         }
     }
     while(j > i);
-   
+
     if(inicio < j) 
         quick(vetor, inicio, j);
 
@@ -194,60 +186,59 @@ void quick(registroMedicamento *vetor, int inicio, int fim)    // utiliza o mét
 }
 
 // função para buscar algum campo
-int buscar(registroMedicamento remedio[], int tamanho, int opcao)// utiliza busca sequencial para varrer o vetor
-{
-    int preco,Disponivel ;
-    string nome, Laboratorio, medicamento ;
-    
+int buscar(registroMedicamento remedio[], int tamanho, int opcao){// utiliza busca sequencial para varrer o vetor
+    int Preco, QuantidadeDisponivel, id_Medicamento ;
+    string NomeMedicamento, NomeDoLaboratorio, DescricaoDoMedicamento ;
+
     quick(remedio, 0, opcao);
-    
+
     switch(opcao)
     {
         case 1: 
         cout << "Identificador: " ;// função usada para busca sequencial pelo identificador.
-        cin >> medicamento;
+        cin >> id_Medicamento;
         for(int i = 0; i < tamanho; i++)
-            if(medicamento == remedio[i].id_Medicamento)
+            if(id_Medicamento == remedio[i].id_Medicamento)
                 return i;
         break;
 
         case 2: 
         cout << "Nome: "; // função usada para busca sequencial pelo nome.
-        cin >> nome;
+        cin >> NomeMedicamento;
         for(int i = 0; i < tamanho; i++)
-            if(nome == remedio[i].nome)
+            if(NomeMedicamento == remedio[i].NomeMedicamento)
                 return i;
         break;
 
         case 3: cout << "Laboratorio: ";	// função usada para busca sequencial pelo pais de origem.
-        cin >> Laboratorio;
+        cin >> NomeDoLaboratorio;
         for(int i = 0; i < tamanho; i++)
-            if(laboratorio == remedio[i].Laboratorio)
+            if(NomeDoLaboratorio == remedio[i].NomeDoLaboratorio)
                 return i;
         break;
 
         case 4: cout << "Descriçao deo medicamento: ";	// função usada para busca sequencial pelo elenco principal.
-        cin >> Descricao;
+        cin >> DescricaoDoMedicamento;
         for(int i = 0; i < tamanho; i++)
-            if(elenco == remedio[i].Descricao)
+            if(DescricaoDoMedicamento == remedio[i].DescricaoDoMedicamento)
                 return i;
         break;
-        
+
         case 5: cout << "Quantidade disponivel: ";	// função usada para busca sequencial pelo elenco principal.
-        cin >> Disponivel;
+        cin >> QuantidadeDisponivel;
         for(int i = 0; i < tamanho; i++)
-            if(elenco == remedio[i].Disponivel)
+            if(QuantidadeDisponivel == remedio[i].QuantidadeDisponivel)
                 return i;
         break;
-        
+
         case 6: 
         cout << "Preço: "; // função usada para busca sequencial pelo preço.
-        cin >> preco;
+        cin >> Preco;
         for(int i = 0; i < tamanho; i++)
-            if(preco == remedio[i].preco)
+            if(Preco == remedio[i].Preco)
                 return i;
         break;
-                
+
         default: 
         cout << "Valor Invalido. Voltando ao menu principal..." << endl;
         return -1;	// para retornar ao menu, com um valor invalido
@@ -256,7 +247,7 @@ int buscar(registroMedicamento remedio[], int tamanho, int opcao)// utiliza busc
 
 
 // funcao para excluir
-void excluir(registroSerie serie[], int tamanho)
+void excluir(registroMedicamento remedio[], int tamanho)
 {	
     int posicao, opcao;
         cout << "Por qual campo voce deseja excluir?" << endl << endl;
@@ -269,7 +260,7 @@ void excluir(registroSerie serie[], int tamanho)
         cout << "Digite o campo escolhido: ";
         cin >> opcao; 
         posicao = buscar(remedio, tamanho, opcao);				
-        remedio[posicao].nome = "-1";
+        remedio[posicao].NomeMedicamento = "-1";
         cout << "Medicamento excluido com sucesso!" << endl << endl;     
 }
 
@@ -277,10 +268,9 @@ void excluir(registroSerie serie[], int tamanho)
 int main ()
 {
     int numeroE = 0, inserir = -1, tamanho = 7 ;
-    char escolha;
+    char simnao;
 
-
-	registroSerie *serie = new registroSerie[tamanho]; // aloca dinamicamente o vetor de registros
+    registroMedicamento *remedio = new registroMedicamento[tamanho]; // aloca dinamicamente o vetor de registros
 
     while (numeroE != 8)
     {
@@ -291,10 +281,11 @@ int main ()
         {
             case (1):
             //bloco de comandos (função incluir)
-            do {
-				inserir++;
+            do 
+            {
+                inserir++;
                 cout << "Digite as informacoes a seguir:" << endl;
-		        if (inserir == tamanho)
+                if (inserir == tamanho)
                     remedio = redimensiona(remedio, tamanho); // vetor de registros redimensiona o tamanho
                 incluir (remedio, tamanho, inserir); // chama a função incluir e inclui uma nova serie
                 cout << endl << endl << "Sucesso ao cadastrar o medicamento." << endl;
@@ -318,13 +309,8 @@ int main ()
             cout << "Lista de Medicamentos:" << endl;
             listar (remedio, inserir); // chama a função listar
             break;
-            
+
             case (4):
-            //bloco de comandos (função alterar)
-            alterar (remedio, tamanho); // chama a função alterar
-            break;
-            
-            case (5):
             //bloco de comandos (função ordenar)
             quick(remedio, 0, inserir + 1); // chama a função ordenar 
             system("cls");
@@ -333,14 +319,13 @@ int main ()
             if ((simnao == 'S') or (simnao == 's'))
                 listar (remedio, inserir);
             break;
-            
-            case (6):
+
+            case (5):
             // sair
             system("cls");
-            cout << "Obrigado por acessar o nosso sistema, " << nome << "!" << endl;
+            cout << "Obrigado por acessar o nosso sistema, " << endl;
             break;
         }
     }
-    
     return 0;
 }
